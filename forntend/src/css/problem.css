@@ -1,0 +1,259 @@
+/*category*/
+#category {
+    display: flex;
+    width: 100%;
+    height: 50vh;
+    margin-bottom: 20px;
+    border-top: 1px solid #BFBFBF;
+    border-bottom: 1px solid #BFBFBF;
+    background-color: #fff;
+}
+
+#category .category_img {
+    width: 30%;
+    overflow: hidden;
+}
+#category .category_img img {
+    object-fit: fill;
+}
+
+#category .category_content {
+    width: 100%;
+    margin: auto 30px;
+  display: flex;
+  flex-direction: column;
+}
+#category .category_content h1{
+  margin-top: 10px;
+}
+#category .category_content p{
+    text-align: justify;
+    padding: 20px 50px;
+    flex-grow: 1;
+}
+
+#category .category_descri{
+    flex-grow: 1;
+}
+
+
+/*problem*/
+#problem .problem_box {
+    width: 90vw;
+    margin: 3rem 2.5rem;
+    display: grid;
+    gap: 1rem 2rem;
+}
+#problem .problem_box h2 {
+  line-height: 1.2;
+  font-weight: 500;
+    margin-bottom: 20px;
+    position: relative;
+}
+#problem .problem_box h2::before{
+    content: "";
+    width: 120px;
+    border: 1.5px solid #002660;;
+    position: absolute;
+    left: 10px;
+    top:100%;
+
+
+}
+
+#problem .info {
+    margin: auto 0px auto 40px;
+}
+#problem .collapses {
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+    min-height: 100px;
+    background-color: #ffffffbf;
+    display: flex;
+    flex-direction: column;
+}
+#problem .collapses .question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+#problem .collapses .question-expand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    height: 84px;
+    margin-bottom: 1rem;
+}
+#problem .collapses .Qtitle{
+    display: flex;
+    align-items: center;
+}
+#problem .collapses .Qtitle span{
+    font-size: 22px;
+    font-weight: 500;
+    margin-right: 20px;
+}
+#problem .collapses .question h3 {
+  margin-bottom: 0;
+}
+#problem .collapses .question-expand h3{
+    margin: 22px auto;
+}
+
+#problem .content {
+    display: flex;
+    flex-direction: column;
+    min-height: 350px;
+    padding: 10px 25px;
+}
+#problem .content_box{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+#problem .content_box h4 {
+  text-transform: none;
+  line-height: 1.5;
+    font-size: 20px;
+    color: #263238;
+    margin-bottom: 20px;
+}
+#problem .content_box p {
+    margin-left: 20px;
+}
+
+.collapses .btn {
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    color: #263c54;
+    margin-left: 1rem;
+    min-width: 3rem;
+}
+.collapses .btn:focus{
+    border: none;
+}
+
+.question-title .collapses .btn {
+  cursor: pointer;
+}
+
+
+/*upload*/
+
+#upload{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#upload .update_box{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: white;
+    width: 70%;
+    height: 70vh;
+    border-radius: 15px;
+}
+#upload .ub_close{
+    position: fixed;
+    top:15px;
+    right:15px;
+    color: #F1F1F1;
+}
+#upload .close_btn {
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+}
+#upload .close_btn svg {
+    width: 100%;
+    height: 100%;
+}
+
+#upload .form_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-evenly;
+}
+#upload .form_box p {
+    color: #c0c1c3;
+}
+
+#upload .form_box .update_info {
+    padding-top: 20px;
+    text-align: center;
+}
+#upload .form_box .update_info h3{
+    font-size: 26px;
+    font-weight: 600;
+}
+#upload .form_box .update_info li{
+    list-style-type: none;
+    display: contents;
+}
+
+
+#upload .form_box form {
+    border: 1px solid transparent;
+    width: 80%;
+    height: 50%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: inset 1px 1px 10px #edeff1;
+    background-color: rgb(248 250 252);
+    color: #a6b4c6;
+    margin-bottom: 35px;
+}
+#upload .form_box form button {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+}
+
+#upload form .update_file  {
+    /* margin: auto; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+#upload form .update_file  label {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+}
+#upload form .update_file  svg {
+    width: 50%;
+    height: 50%;
+}
+#file-upload{
+    display: none
+}
+#input_num{
+    display: block;
+}
+
+

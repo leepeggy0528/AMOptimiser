@@ -1,0 +1,37 @@
+/*feature_intro*/
+#feature_intro {
+    margin: 45px 20px 5px 50px;
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+}
+#feature_intro .feature_title {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+#feature_intro .feature_descri {
+    flex-grow: 1;
+    padding: 10px 40px  10px 30px;
+    text-align: justify;
+    width: 95%;
+}
+
+/*#feature_category*/
+#feature_category {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+#feature_cate .category_cards_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:  flex-start;
+}
+
+#feature_cate .category_card {
+    width: 85%;
+    margin-left: 80px;
+}
+
