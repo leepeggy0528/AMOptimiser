@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="" novalidate>
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.items.label }}<br/>{{ form.items(size=64) }}<br/>
+        {% for error in form.items.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+    <div>{{ form.submit() }}</div>
+</form>
+<div class="container m-3">
+    <form method="POST" action="" novalidate>
+        {{ form1.hidden_tag() }}
+        <table id="data" class="table table-striped">
+            <thead>
+            <caption> Tobuy List</caption>
+            <tr>
+                <th>ID</th>
+                <th>Items</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tobuy in tobuys %}
+                <tr>
+                    <td>{{ tobuy.tobuy_id}}</td>
+                    <td>{{ tobuy.item }}</td>
+                    <td>
+                        <button type="submit" name="buy" value="{{ tobuy.tobuy_id }}">
+                            Buy
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</div>
+<div class="container m-3">
+        <table id="data" class="table table-striped">
+            <thead>
+            <caption> Bought List</caption>
+            <tr>
+                <th>ID</th>
+                <th>Items</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for bought in boughts %}
+                <tr>
+                    <td>{{ bought.bought_id}}</td>
+                    <td>{{ bought.item }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+{% endblock %}
