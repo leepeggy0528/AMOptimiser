@@ -1,0 +1,2 @@
+min_power,max_power,interval_power,min_speed,max_speed,interval_speed,min_hatch,max_hatch,interval_hatch
+50,175,25,750,1650,225,0.0375,0.075,0.0125

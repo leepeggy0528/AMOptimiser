@@ -44,5 +44,9 @@ class History(db.Model):
     download_file = db.Column(db.String(64), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
+# class Material(db.Model):
+#     __tablename__ = 'material'
+#     material_id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+#     thickness = db.Column(db.Float, nullable=False)
 
 

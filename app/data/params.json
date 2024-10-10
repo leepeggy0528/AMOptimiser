@@ -1,11 +1,11 @@
 {
     "min_power": 50.0,
-    "max_power": 400.0,
+    "max_power": 175.0,
     "interval_power": 25.0,
     "min_speed": 750.0,
-    "max_speed": 3000.0,
+    "max_speed": 1650.0,
     "interval_speed": 225.0,
     "min_hatch": 0.0375,
-    "max_hatch": 0.15,
+    "max_hatch": 0.075,
     "interval_hatch": 0.0125
 }

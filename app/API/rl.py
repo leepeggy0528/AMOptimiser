@@ -8,20 +8,22 @@ import json
 from app import app
 
 # Reading material properties from a JSON file.
-with app.open_resource('API/material_params.json', 'r') as f:
+with app.open_resource('data/material_params.json', 'r') as f:
     data = json.load(f)
-# Assigning the values to variables, so they can be used in the class below
+    if not data:
+        with app.open_resource('data/init_material_params.json', 'r') as f2:
+            data = json.load(f2)
 thickness = data['thickness']          # Powder bed thickness
 T0 = data['T0']                        # Initial temperature
 Tm = data['Tm']                        # Melting temperature
 Tb = data['Tb']                        # Boiling temperature
 alpha_min = data['alpha_min']          # Absorptivity
 rho = data['density']                  # Density
-cp = data['heat capacity']             # Specific heat capacity
-ap = data['thermal diff']              # Thermal diffusivity
-sigma = data['spot dev']               # Laser spot deviation
-kappa = data['thermal cond']           # Thermal conductivity
-L = data['latent heat']                # Latent heat of fusion
+cp = data['heat_capacity']             # Specific heat capacity
+ap = data['thermal_diff']              # Thermal diffusivity
+sigma = data['spot_dev']               # Laser spot deviation
+kappa = data['thermal_cond']           # Thermal conductivity
+L = data['latent_heat']                # Latent heat of fusion
 tens = data['tens']                    # Surface tension
 visc = data['visc']                    # Dynamic viscosity
 f.close()

@@ -1,0 +1,15 @@
+{
+    "thickness": 3e-05,
+    "T0": 292.15,
+    "Tm": 819.45,
+    "Tb": 2786.0,
+    "alpha_min": 0.047,
+    "density": 2850.0,
+    "heat_capacity": 900.0,
+    "thermal_diff": 4.6e-05,
+    "spot_dev": 1.67e-05,
+    "thermal_cond": 234.0,
+    "latent_heat": 269000.0,
+    "tens": 0.871,
+    "visc": 0.001548
+}

@@ -34,8 +34,7 @@ class Training_rl():
                      'optimal state', 'reward', 'reward per episode', 'time taken', 'no. of states visited'])
 
         for j in range(0, self.epochs):  # For each epoch
-            t1 = time.perf_counter()  # Beginning timer for the epoch
-
+            t1 = time.perf_counter()
             # Creating instance of the environment
             env = CustomEnv(self.parameters, self.timestep, self.model_alpha, self.model_gamma, self.model_epsilon)
 
@@ -67,22 +66,22 @@ class Training_rl():
                 states_visited.clear()
 
             t2 = time.perf_counter()  # Ending timer for the epoch
-            time_taken = t2 - t1  # Calculating time taken for the epoch to run
+            time_taken = t2 - t1
 
-            row = pd.Series([self.timestep, j + 1, env.alpha, env.gamma, env.steps, env.optimal_steps, env.optimal_state, \
+        row = pd.Series([self.timestep, j + 1, env.alpha, env.gamma, env.steps, env.optimal_steps, env.optimal_state, \
                              env.rmax, epoch_reward / episode, time_taken, len(states)], \
                             index=train_results.columns)
-            train_results.loc[len(train_results)] = row
+        train_results.loc[len(train_results)] = row
 
-            train_results.sort_values('reward', ascending=False)
-            print(env.results, type(env.results))
-            print("Optimal parameter configurations (P, v, h):\n")
+        train_results.sort_values('reward', ascending=False)
+        print(env.results, type(env.results))
+        print("Optimal parameter configurations (P, v, h):\n")
 
-            opt_parameter=[]
-            for i in range(len(train_results)):
-                opt_state = train_results['optimal state'][i]
-                print(f"Epoch {i + 1}: {self.parameters[int(opt_state)]}")
-                opt_parameter.append(self.parameters[int(opt_state)])
+        opt_parameter=[]
+        for i in range(len(train_results)):
+            opt_state = train_results['optimal state'][i]
+            print(f"Epoch {i + 1}: {self.parameters[int(opt_state)]}")
+            opt_parameter.append(self.parameters[int(opt_state)])
 
-            return opt_parameter
+        return opt_parameter
 
