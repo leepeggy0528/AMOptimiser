@@ -199,8 +199,10 @@
 }
 
 #upload .form_box .update_info {
-    padding-top: 20px;
+    padding: 20px;
+    margin: 10px auto 20px;
     text-align: center;
+    height: 15%;
 }
 #upload .form_box .update_info h3{
     font-size: 26px;
@@ -213,22 +215,14 @@
 
 
 #upload .form_box form {
-    border: 1px solid transparent;
     width: 80%;
-    height: 50%;
-    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: inset 1px 1px 10px #edeff1;
-    background-color: rgb(248 250 252);
-    color: #a6b4c6;
-    margin-bottom: 35px;
+    flex-grow: 1;
 }
 #upload .form_box form button {
-    position: absolute;
-    bottom: 20px;
-    right: 0;
+    width: 100%;
 }
 
 #upload form .update_file  {
@@ -256,4 +250,118 @@
     display: block;
 }
 
+/*Form-Wizard*/
+.react-form-wizard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 0;
+}
+.react-form-wizard .wizard-header {
+    display: none;
+}
+.react-form-wizard .wizard-nav-pills {
+    display: none;
+}
+.react-form-wizard .wizard-navigation {
+    border: 1px solid transparent;
+    border-radius: 15px;
+    box-shadow: inset 1px 1px 10px #edeff1;
+    background-color: rgb(248 250 252);
+    color: #a6b4c6;
+    margin-bottom: 25px;
+    height: 358.680px;
+    flex-grow: 1;
+    overflow: scroll;
+}
+.react-form-wizard .wizard-tab-content {
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}
+.react-form-wizard .wizard-card-footer {
+    padding: 0;
+    height: 15%;
+}
 
+.wizard-footer-right, .wizard-footer-left {
+    background-color: unset !important;
+    border-color: unset !important;
+    color: unset !important;
+    border-radius: unset !important;
+}
+.wizard-footer-right button {
+    border: 0 !important;
+    border-radius: 15px !important;
+    background: rgb(141 207 255) !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    padding: 10px 16px !important;
+    width: 15% !important;
+    float: right !important;
+    margin-right: 0 !important;
+    line-height: inherit !important;
+    font-weight: 400 !important;
+}
+.wizard-footer-right button:hover {
+  background: rgb(189 227 255) !important;
+  color: #309df0 !important;
+}
+
+.wizard-footer-left button {
+    background: transparent !important;
+    border: #1565c0 2.5px solid !important;
+    padding: 10px 16px !important;
+    color: #1565c0 !important;
+    border-radius: 15px !important;
+    line-height: inherit !important;
+    font-weight: 400 !important;
+    margin-right: 0 !important;
+}
+.wizard-footer-left button:hover {
+    border: #67acff 2.5px solid !important;
+    color: #67acff !important;
+}
+.react-form-wizard .clearfix:after {
+    display: none;
+}
+
+/*InputNum*/
+.muti_input {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 10px;
+    p{
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+}
+.muti_input svg, #addbtn svg {
+    width: 100% !important;
+    height: 100% !important;
+    color: rgb(141 207 255);
+    }
+
+.muti_input .input_num {
+    width: 70%;
+}
+
+.muti_input button, #addbtn {
+    background: rgb(141 207 255 / 0%);
+    width: unset !important;
+    padding: unset;
+    margin-right: 0;
+}
+
+.muti_input button:hover, #addbtn:hover{
+    svg{
+        color: #309df0;
+    }
+}
+button#addbtn {
+    width: 150%;
+    height: 150%;
+}

@@ -11,9 +11,14 @@ import {useState, useEffect} from "react";
 
 export default function Result() {
     const {name, id}=useParams()
-    const [context, setContext]=useState(null)
     const Location = useLocation()
     const Navigate=useNavigate();
+     const [context, setContext]=useState(false)
+    const [show, setShow]=useState(false)
+    const [msg, setMsg]=useState(null)
+    const [Power, setPower]=useState(null)
+    const [Speed, setSpeed]=useState(null)
+    const [Hatch, setHatch]=useState(null)
 
     useEffect(() => {
         // const downloadFile = async () => {
@@ -54,9 +59,9 @@ export default function Result() {
             try {
                 const response = await axios.post(
                     `http://localhost:5000/upload/${name}/${id}`,
-                    {"number": Location.state.data}
+                    {"number": Location.state.datas, "material": Location.state.body}
                 );
-                setContext(response.data);
+                setMsg(response.data.message);
             } catch (error) {
                 Navigate(-1)
                 console.error("Error downloading CSV:", error);
@@ -64,83 +69,33 @@ export default function Result() {
         };  handleInputNum();
         }, [Location.state.data]);
 
-    // const handleInputNum = async (data) => {
-    //       // ev.preventDefault();
-    //       const body = {
-    //           number: data.num
-    //       }
-    //
-    //       const requestOptions = {
-    //           method: "POST",
-    //           headers: {
-    //               'content-type': 'application/json'
-    //           },
-    //           body: JSON.stringify(body)
-    //       }
-    //
-    //       fetch(`http://localhost:3000/features/${prop.name}/${prop.id}/result`, requestOptions)
-    //           .then(res => res.json())
-    //           .then(() => {
-    //               setisUploading(false);
-    //               Navigate("/features/" + prop.name + "/" + prop.id + "/result")
-    //           })
-    //           .catch(err => {
-    //               setErrormsg(err.message);
-    //               setisFileUploaded(true);
-    //               setShowForm(false);
-    //           });
-    //       reset()
-    //   }
+    useEffect(() => {
+            const interval = setInterval(()=>{
+                setContext(null);
+                 axios.get('http://127.0.0.1:5000/result')
+                  .then(res =>
+                  {
+                       if (res.status === 200) {
+                          setContext(true);
+                          setShow(true);
+                          const inx=res.data.opt_result.length
+                          setPower(Object.values(res.data.opt_result)[inx-1][0])
+                          setSpeed(Object.values(res.data.opt_result)[inx-1][1])
+                          setHatch(Object.values(res.data.opt_result)[inx-1][2])
+                          setMsg(null);
+                          clearInterval(interval)
+                      }else{
+                           setContext(false);
+                           setShow(false)
+                           setPower(null)
+                          setSpeed(null)
+                          setHatch(null)
+                          setMsg(res.data.message);
 
-    // const downloadFile = async () => {
-    //   try {
-    //     const response = await axios.get(
-    //       "http://localhost:5000/upload",
-    //       {
-    //         responseType: "blob",
-    //       }
-    //     );
-    //
-    //     // Create a Blob from the response data
-    //     const pdfBlob = new Blob([response.data.message], { type: "application/pdf" });
-    //
-    //     // Create a temporary URL for the Blob
-    //     const url = window.URL.createObjectURL(pdfBlob);
-    //
-    //     // Create a temporary <a> element to trigger the download
-    //     const tempLink = document.createElement("a");
-    //     tempLink.href = url;
-    //     tempLink.setAttribute(
-    //       "download",
-    //       `result.pdf`
-    //     ); // Set the desired filename for the downloaded file
-    //
-    //     // Append the <a> element to the body and click it to trigger the download
-    //     document.body.appendChild(tempLink);
-    //     tempLink.click();
-    //
-    //     // Clean up the temporary elements and URL
-    //     document.body.removeChild(tempLink);
-    //     window.URL.revokeObjectURL(url);
-    //   } catch (error) {
-    //     console.error("Error downloading PDF:", error);
-    //   }
-    // };
-
-     // const inputFile = async() => {
-     //     try {
-     //         const response = await axios.get(
-     //             `http://127.0.0.1:5000/upload/${name}/${id}`,
-     //             {
-     //                 responseType: "json",
-     //             })
-     //         console.log(response.data.nums)
-     //         return setContext(response.data.nums)
-     //     } catch (error) {
-     //         console.error("Error downloading CSV:", error);
-     //     }
-     // }
-
+                      }
+          })}, 5000);
+            return () => clearInterval(interval)
+        }, []);
 
   return(
   <main className="container-fluid">
@@ -157,24 +112,37 @@ export default function Result() {
             <h1>Result</h1>
             </div>
             <div className="result_content">
-              <p className="p_discrib">Quisque finibus nulla id molestie semper. Donec ut tortor ligula.
-                  Fusce gravida tellus sed sollicitudin lacinia.Mauris a maximus magna.
-                  Aliquam turpis mi, accumsan vel urna faucibus, elementum sagittis massa.
-                  Quisque finibus nulla id molestie semper. Donec ut tortor ligula.
-                  Fusce gravida tellus sed sollicitudin lacinia.Mauris a maximus magna.
-                  Aliquam turpis mi, accumsan vel urna faucibus, elementum sagittis massa.
-                  Quisque finibus nulla id molestie semper. Donec ut tortor ligula.
-                  Fusce gravida tellus sed sollicitudin lacinia.Mauris a maximus magna.
-                  Aliquam turpis mi, accumsan vel urna faucibus, elementum sagittis massa.
-                  {JSON.stringify(context)}
+              <p className="p_discrib">
+                  {msg? JSON.stringify(msg):''}
+                  {context &&
+                      <>
+                      {/*    <span>*/}
+                      {/*    Your input: number: {Location.state.datas}, material: {Location.state.body}*/}
+                      {/*</span>*/}
+                          <span>
+                              The optimal parameters is: <br/>
+                            Power: {Power}<br/>
+                            Speed: {Speed}<br/>
+                              Hatch: {Hatch}
+                      </span>
+                      </>
+
+                  }
               </p>
             </div>
-            <div className="result_btn">
-                <button className="btn_back"  onClick={(e) => {
+          <div className="result_btn">
+              <button className="btn_back" onClick={(e) => {
                   e.preventDefault();
                   Navigate(-1);
-                }}>Back</button>
-                <DownloadCSV cate={name} id={id} response={JSON.stringify(context)}/>
+              }}>Back</button>
+              {
+                  show &&
+                                  <DownloadCSV cate={name} id={id} response={JSON.stringify({
+                Power: Power,
+                Speed: Speed,
+                Hatch: Hatch
+            })}/>
+              }
             </div>
       </section>
   </main>

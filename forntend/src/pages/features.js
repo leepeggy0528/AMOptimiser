@@ -32,10 +32,6 @@ export default function Features() {
                   Quisque finibus nulla id molestie semper. Donec ut tortor ligula. Fusce gravida tellus sed sollicitudin lacinia."/>
                   <Feature_Card name="efficient" img={Image.efficient} content="Quisque finibus nulla id molestie semper.
                   Quisque finibus nulla id molestie semper. Donec ut tortor ligula. Fusce gravida tellus sed sollicitudin lacinia."/>
-                  <Feature_Card name="wastes" img={Image.wastes} content="Quisque finibus nulla id molestie semper. Donec ut tortor ligula. Fusce gravida tellus sed sollicitudin lacinia.
-                  Quisque finibus nulla id molestie semper. Donec ut tortor ligula. Fusce gravida tellus sed sollicitudin lacinia."/>
-                  <Feature_Card name="efficient" img={Image.efficient} content="Quisque finibus nulla id molestie semper.
-                  Quisque finibus nulla id molestie semper. Donec ut tortor ligula. Fusce gravida tellus sed sollicitudin lacinia."/>
               </div>
           </section>
       </main>

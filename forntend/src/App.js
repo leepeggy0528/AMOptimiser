@@ -4,8 +4,9 @@ import Navbar1 from "./componeents/Navbar"
 import Features from "./pages/features"
 import Contact from "./pages/contact"
 import About from "./pages/about"
-import Info from "./pages/member_info"
-import History from "./pages/member_hist"
+// import Info from "./componeents/Member_info"
+// import History from "./componeents/Member_hist"
+import Member from "./pages/member"
 import Problem from "./pages/problems"
 import Result from "./pages/result"
 import Index from "./pages/index"
@@ -55,8 +56,7 @@ function App() {
                     {logged?
                         (
                             <Route path="/member">
-                                <Route index element={<Info/>} />
-                                <Route path="history" element={<History/>} />
+                                <Route index element={<Member/>} />
                             </Route>
                             ):''
                     }

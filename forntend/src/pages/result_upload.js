@@ -2,7 +2,7 @@ import '../css/result.css';
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import axios from "axios";
 import {FaHome} from "react-icons/fa";
-import {useParams, useNavigate, useLocation} from "react-router-dom";
+import {useParams, useNavigate, useLocation, json} from "react-router-dom";
 import DownloadCSV from '../componeents/DownloadCSV';
 import {useState, useEffect} from "react";
 
@@ -10,23 +10,74 @@ import {useState, useEffect} from "react";
 
 export default function Result_upload() {
     const {name, id}=useParams()
-    const [context, setContext]=useState(null)
+    const [context, setContext]=useState(false)
     const [msg, setMsg]=useState(null)
+    const [Power, setPower]=useState(null)
+    const [Speed, setSpeed]=useState(null)
+    const [Hatch, setHatch]=useState(null)
     const Location = useLocation()
     const Navigate=useNavigate();
+    const [show, setShow]=useState(false)
+
+    function readFileAsync(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+
+                    reader.onload = () => {
+                        resolve(reader.result);
+                    };
+
+                    reader.onerror = () => {
+                        reject(reader.error);
+                    };
+
+                    reader.readAsDataURL(file); // 或者使用 readAsText, readAsArrayBuffer 等根据需要
+                });
+            }
+
+    async function handleFileUpload(files) {
+        try {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileContent = await readFileAsync(file);
+                console.log(fileContent); // 这里你可以处理文件内容，例如发送到服务器
+            }
+        } catch (error) {
+                    alert("Please upload at least one file")
+                    Navigate(-1)
+            console.error("Error reading file:", error);
+        }
+    }
 
     useEffect(() => {
         const handleInputNum = async () => {
-            const files = new FormData();
+            const files = new FormData()
             // Append the file to the request body
             for (let i = 0; i < Location.state.data.length; i++) {
-            files.append("file", Location.state.data[i], Location.state.data[i].name);
+                files.append("file", Location.state.data[i], Location.state.data[i].name);
             }
+            // files.append("file", Location.state.data[0], Location.state.data[0].name);
+            const params = JSON.stringify(Location.state.body)
+            files.append("params", params)
+
+            // const file = Location.state.data[0];
+            // await handleFileUpload(file);
+            // const file = {
+            //     fileName: files.name,
+            //     fileData: "",
+            //     fileType: files.type,
+            // };
+            // console.log(Location.state.body)
+            // `http://localhost:5000/setParams/resetparams`
+
             try {
                 const response = await axios.post(
                     `http://localhost:5000/upload/${name}/${id}`,
-                    files
+                   files,
                 );
+                // {headers: {
+                //         'Content-Type':  'application/json'
+                //     }}
                 setMsg(response.data.message);
             } catch (error) {
                 Navigate(-1)
@@ -34,19 +85,31 @@ export default function Result_upload() {
             }
         };  handleInputNum();
         }, []);
+
     useEffect(() => {
             const interval = setInterval(()=>{
+                setContext(null);
                  axios.get('http://127.0.0.1:5000/result')
                   .then(res =>
                   {
                        if (res.status === 200) {
-                          setContext(res.data.opt_result);
+                          setContext(true);
+                          const inx=res.data.opt_result.length
+                           setShow(true)
+                          setPower(Object.values(res.data.opt_result)[inx-1][0])
+                          setSpeed(Object.values(res.data.opt_result)[inx-1][1])
+                          setHatch(Object.values(res.data.opt_result)[inx-1][2])
                           setMsg(null);
                           clearInterval(interval)
                       }else{
+                           setContext(false);
+                           setShow(false);
+                           setPower(null)
+                          setSpeed(null)
+                          setHatch(null)
                           setMsg(res.data.message);
                       }
-          })}, 10000);
+          })}, 5000);
             return () => clearInterval(interval)
         }, []);
 
@@ -149,7 +212,23 @@ export default function Result_upload() {
             <div className="result_content">
               <p className="p_discrib">
                   {msg? JSON.stringify(msg):''}
-                  {context? JSON.stringify(context):''}
+                  {context &&
+                      <>
+                      {/*    <span>*/}
+                      {/*    Your input: <br/>*/}
+                      {/*        number: {Location.state.datas}<br/>*/}
+                      {/*        material: {JSON.stringify(Location.state.body)}<br/>*/}
+                      {/*        ---------------------------------------------*/}
+                      {/*        <br/><br/>*/}
+                      {/*</span>*/}
+                          <span>
+                              The optimal parameters is: <br/>
+                            Power: {Power}<br/>
+                            Speed: {Speed}<br/>
+                              Hatch: {Hatch}
+                      </span>
+                      </>
+                  }
               </p>
             </div>
             <div className="result_btn">
@@ -157,7 +236,14 @@ export default function Result_upload() {
                   e.preventDefault();
                   Navigate(-1);
                 }}>Back</button>
-                <DownloadCSV cate={name} id={id} response={JSON.stringify(context)}/>
+                              {
+                  show &&
+                                  <DownloadCSV cate={name} id={id} response={JSON.stringify({
+                Power: Power,
+                Speed: Speed,
+                Hatch: Hatch
+            })}/>
+              }
             </div>
       </section>
   </main>

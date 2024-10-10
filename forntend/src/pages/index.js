@@ -1,11 +1,12 @@
 import '../css/index.css'
 import Feature_Card from '../componeents/Cards'
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 import Images from '../Images'
 
 
 export default function Index() {
   const Image = {...Images};
+  const navigate = useNavigate();
   return(
   <main className="container-fluid">
     <section id="introduce">
@@ -17,10 +18,10 @@ export default function Index() {
           <h1>Optimising Additive Manufacturing</h1>
         </div>
         <div className="intro_descr">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non sapien laoreet, tempor ligula sit amet, sollicitudin orci. </p>
+          <p>This web optimizes additive manufacturing processes using machine learning, offering downloadable results to improve print quality and efficiency and reduce material waste.</p>
         </div>
         <div className="intro_btn">
-          <button type="button" className="try_btn">Try It</button>
+          <button type="button" className="try_btn" onClick={()=>navigate("/features")} >Try It</button>
         </div>
       </div>
     </section>

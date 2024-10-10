@@ -6,16 +6,17 @@ import axios from "axios";
 const DownloadCSV = (prop) => {
   const convertToCSV = (objArray) => {
     const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-    console.log(Object.keys(array).length)
+    console.log(Object.entries(array).length)
     let str = '';
     for (let i = 0; i < Object.keys(array).length; i++) {
       // let line = 'id, message, check';
       let line = '';
-      for (let index in Object.values(array)[i]) {
+      for (let index=0; index < Object.entries(array)[i].length; index++) {
         if (line !== '') line += ' ';
-        line += Object.values(array)[i][index];
+        line += Object.entries(array)[i][index];
       }
       str += line + '\r\n';
+      // console.log(str)
     }
     return str;
   };

@@ -6,6 +6,7 @@ import {AiOutlineClose} from "react-icons/ai";
 import { useAuth ,logout} from '../signIn'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import {useNavigate} from "react-router-dom";
 import UpdataFile from "./UpdataFile";
 import InputNum from "./InputNum";
 import {Alert} from "react-bootstrap";
@@ -13,6 +14,7 @@ import {Alert} from "react-bootstrap";
 export default function Navbar1() {
     const [showed, setShowForm] = useState(false)
     const [user] = useAuth();
+     const Navigate=useNavigate()
     useEffect(()=>{
           if (user){
               setShowForm(false)
@@ -40,16 +42,17 @@ export default function Navbar1() {
                                 variant='primary'
                                 title={sessionStorage.username}
                               >
-                                <Dropdown.Item eventKey="1"><CustomLink to="/member" className="nav-item nav-link">Information</CustomLink></Dropdown.Item>
-                                <Dropdown.Item eventKey="2"><CustomLink to="/member/history" className="nav-item nav-link">History</CustomLink></Dropdown.Item>
+                                <Dropdown.Item eventKey="1" onClick={()=>Navigate("/member#information", {state:"information"})}>Information</Dropdown.Item>
+                                <Dropdown.Item eventKey="2" onClick={()=>Navigate("/member#history", {state:"history"})}>History</Dropdown.Item>
                                 <Dropdown.Divider />
-                                <Dropdown.Item eventKey="3" onClick={()=>{logout(); sessionStorage.clear()}}>Logout</Dropdown.Item>
+                                <Dropdown.Item eventKey="3" onClick={()=>{logout(); sessionStorage.clear(); console.log("Logout");Navigate("/")}}>Logout</Dropdown.Item>
                               </DropdownButton>
                           </>
                           ) : (
                             <>
                                 <button id="signin" onClick={() => {
-                                    setShowForm(true)
+                                    setShowForm(true);
+                                    console.log('Login form is opened')
                                 }}>
                                     Sign in
                                 </button>
@@ -64,7 +67,7 @@ export default function Navbar1() {
               <section id="sign_in">
                   <div className="login_box">
                       <div className="ub_close">
-                          <button className='close_btn' onClick={() => setShowForm(false)}>
+                          <button className='close_btn' onClick={() => {setShowForm(false); console.log('Login form is closed')}}>
                               <AiOutlineClose/>
                           </button>
                       </div>

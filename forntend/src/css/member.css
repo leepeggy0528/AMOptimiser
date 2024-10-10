@@ -1,0 +1,9 @@
+#list_group .col-sm-4 {
+    margin: 20px;
+    width: 20%;
+    .list-group{
+        div:hover{
+            cursor: pointer;
+        }
+    }
+}

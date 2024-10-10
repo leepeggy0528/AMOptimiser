@@ -18,11 +18,13 @@ function Login() {
     const loginBtn  = () => {
        setAddLoginClass(false)
         setAddSignUpClass(true)
+        console.log('This is the login form.')
     };
 
     const signupBtn = () => {
         setAddLoginClass(true)
         setAddSignUpClass(false)
+         console.log('This is the sign-up form.')
     };
 
     const handleSignUp = async (data) => {
@@ -54,6 +56,9 @@ function Login() {
                   if (data.status==='success'){
                       setAddLoginClass(false)
                         setAddSignUpClass(true)
+                      setShow(true)
+                      setServerResponse("Registered successfully")
+                      setStatus('success')
                       reset()
                   }
                   setStatus(data.status)
@@ -65,7 +70,9 @@ function Login() {
               });
 
       }else {
-            alert("Passwords do not match")
+              setShow(true)
+                      setServerResponse("Passwords do not match")
+                      setStatus('danger')
         }
      }
     const handleSignIn = async (ev) => {
@@ -86,8 +93,9 @@ function Login() {
               .then(res => res.json())
               .then(data=>{
                    if (data){
-                    login(data.access_token)
-                       sessionStorage.setItem('username', data.user)
+                    login(data.access_token);
+                       sessionStorage.setItem('username', data.user);
+                       alert("Login successfully")
                        if(data.message) {
                            setShow(true)
                            setServerResponse(data.message)

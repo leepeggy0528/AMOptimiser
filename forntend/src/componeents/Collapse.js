@@ -39,7 +39,7 @@ function Question(prop) {
                         </div>
                     </div>
                     <div className="pro_btn">
-                        <button className="use_btn" onClick={() => {setShowForm(true)
+                        <button className="use_btn" onClick={() => {setShowForm(true); console.log("Form is open");
                             let obj = Object.values(prop.limit)[0].props.children
                              if (obj == 'number'){
                                     isUploaded(false)
@@ -56,7 +56,7 @@ function Question(prop) {
                 <section id="upload">
                     <div className="update_box">
                         <div className="ub_close">
-                            <button className='close_btn' onClick={() => setShowForm(false)}>
+                            <button className='close_btn' onClick={() => {setShowForm(false); console.log("Form is closed")}}>
                                 <AiOutlineClose/>
                             </button>
                         </div>

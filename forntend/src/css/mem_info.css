@@ -1,0 +1,67 @@
+.row {
+    align-items: baseline;
+}
+
+.account_title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    &::after{
+        position: absolute;
+        content: "";
+        width: 15%;
+        border: 1px #002660 solid;
+        bottom: -4px;
+        left: 25px;
+    }
+
+    h1{
+        margin: unset;
+    }
+    .edit {
+    background: none;
+    border: none;
+    color: #002660;
+    float: none;
+    width: unset;
+    padding: unset;
+    margin: auto 20px;
+     :hover{
+         color: #3460a5;
+     }
+    svg {
+        width: 23px;
+        height: 100%;
+    }
+    }
+}
+
+.account_form {
+    display: flex;
+    flex-direction: column;
+    margin: 50px 20px;
+
+    #modify {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.form-holder {
+            flex-grow: 1;
+
+            div{
+                display: flex;
+                margin-bottom: 20px;
+                align-items: center;
+
+                .form-label {
+                    width: 20%;
+                    font-size: 20px;
+                }
+                .form-control {
+                    flex-grow: 1;
+                }
+            }
+        }
